@@ -3,6 +3,10 @@
 namespace WebModularity\LaravelProviders;
 
 use Illuminate\Database\Eloquent\Model;
+use SKAgarwal\GoogleApi\PlacesApi;
+use SKAgarwal\GoogleApi\Exceptions\GooglePlacesApiException;
+use Stevenmaguire\Yelp\Client as YelpClient;
+use Log;
 
 class Provider extends Model
 {

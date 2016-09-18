@@ -4,10 +4,6 @@ namespace WebModularity\LaravelProviders;
 
 use Illuminate\Database\Eloquent\Model;
 use WebModularity\LaravelProviders\Provider;
-use SKAgarwal\GoogleApi\PlacesApi;
-use SKAgarwal\GoogleApi\Exceptions\GooglePlacesApiException;
-use Stevenmaguire\Yelp\Client as YelpClient;
-use Log;
 use WebModularity\LaravelProviders\Scopes\ProviderScope;
 
 class ReviewProvider extends Model
