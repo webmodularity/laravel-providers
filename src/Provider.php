@@ -37,6 +37,10 @@ class Provider extends Model
         return $parsed;
     }
 
+    public static function getConfiguredProviderSlugs()
+    {
+        return array_keys(config('local.providers', []));
+    }
 
     public static function getDataFromGoogle() {
         $apiKey = config('local.api.google.key');
