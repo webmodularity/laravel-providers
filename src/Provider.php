@@ -25,7 +25,7 @@ class Provider extends Model
     }
 
     public static function getUrlReplaceConfig($sourceSlug) {
-        $configData = config('local.sources.' . $sourceSlug, []);
+        $configData = config('local.providers.' . $sourceSlug, []);
         $parsed = [];
         foreach ($configData as $key => $data) {
             $parsed['{' . $key . '}'] = $data;
@@ -36,7 +36,7 @@ class Provider extends Model
 
     public static function getDataFromGoogle() {
         $apiKey = config('local.api.google.key');
-        $placeId = config('local.sources.google.place_id');
+        $placeId = config('local.providers.google.place_id');
         $googlePlaces = new PlacesApi($apiKey);
         $response = null;
         try {
@@ -57,6 +57,6 @@ class Provider extends Model
             'token' => config('local.api.yelp.token'),
             'tokenSecret' => config('local.api.yelp.tokenSecret')
         ]);
-        return collect($client->getBusiness(config('local.sources.yelp.id')));
+        return collect($client->getBusiness(config('local.providers.yelp.id')));
     }
 }
