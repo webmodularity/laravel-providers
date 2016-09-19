@@ -29,22 +29,36 @@ class Provider extends Model
     }
 
     public static function getUrlReplaceConfig($sourceSlug) {
-        $configData = config('local.providers.' . $sourceSlug, []);
+        $configData = config('providers.' . $sourceSlug, []);
         $parsed = [];
         foreach ($configData as $key => $data) {
-            $parsed['{' . $key . '}'] = $data;
+            if (is_array($data)) {
+                foreach ($data as $nestedKey => $nestedData) {
+                    $fullKey = $key . '.' . $nestedKey;
+                    $parsed['{' . $fullKey . '}'] = $nestedData;
+                }
+            } else {
+                $parsed['{' . $key . '}'] = $data;
+            }
         }
         return $parsed;
     }
 
     public static function getConfiguredProviderSlugs()
     {
-        return array_keys(config('local.providers', []));
+        $configuredProviders = [];
+        $allProviders = config('providers', []);
+        foreach ($allProviders as $providerKey => $providerData) {
+            if (isset($providerData['id']) && !empty($providerData['id'])) {
+                $configuredProviders[] = $providerKey;
+            }
+        }
+        return $configuredProviders;
     }
 
     public static function getDataFromGoogle() {
-        $apiKey = config('local.api.google.key');
-        $placeId = config('local.providers.google.place_id');
+        $apiKey = config('services.google.key');
+        $placeId = config('providers.google.place.id');
         $googlePlaces = new PlacesApi($apiKey);
         $response = null;
         try {
@@ -60,11 +74,11 @@ class Provider extends Model
 
     public static function getDataFromYelp() {
         $client = new YelpClient([
-            'consumerKey' => config('local.api.yelp.consumerKey'),
-            'consumerSecret' => config('local.api.yelp.consumerSecret'),
-            'token' => config('local.api.yelp.token'),
-            'tokenSecret' => config('local.api.yelp.tokenSecret')
+            'consumerKey' => config('services.yelp.consumerKey'),
+            'consumerSecret' => config('services.yelp.consumerSecret'),
+            'token' => config('services.yelp.token'),
+            'tokenSecret' => config('services.yelp.tokenSecret')
         ]);
-        return collect($client->getBusiness(config('local.providers.yelp.id')));
+        return collect($client->getBusiness(config('providers.yelp.id')));
     }
 }
