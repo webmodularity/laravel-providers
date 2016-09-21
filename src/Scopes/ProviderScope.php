@@ -17,7 +17,6 @@ class ProviderScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        return $builder->with('provider')
-            ->leftJoin('common.providers', 'providers.id', '=', $model->getTable() . '.provider_id');
+        return $builder->leftJoin('common.providers as P', 'P.id', '=', $model->getTable() . '.provider_id');
     }
 }
