@@ -7,7 +7,7 @@ use WebModularity\LaravelProviders\Provider;
 use Log;
 use WebModularity\LaravelProviders\Scopes\ProviderScope;
 
-class ReviewProvider extends Model
+class SocialProvider extends Model
 {
     /**
      * The table associated with the model.
