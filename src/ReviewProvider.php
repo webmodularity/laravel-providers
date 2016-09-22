@@ -22,17 +22,6 @@ class ReviewProvider extends Model
      */
     public $timestamps = false;
 
-    /**
-     * Scope a query to join providers with an alias of PROVIDER
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query Builder instance
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeJoinProvider($query)
-    {
-        return $query->select('review_providers.*', 'providers.name', 'providers.slug')->leftJoin('common.providers AS providers', 'providers.id', '=', 'common.review_providers.provider_id');
-    }
-
     public function getUrlAttribute($value) {
         return Provider::urlReplace($this->provider->slug, $value);
     }

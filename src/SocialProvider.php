@@ -23,17 +23,6 @@ class SocialProvider extends Model
      */
     public $timestamps = false;
 
-    /**
-     * Scope a query to join providers with an alias of PROVIDER
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query Builder instance
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeJoinProvider($query)
-    {
-        return $query->select('social_providers.*', 'providers.name AS provider.name', 'providers.slug AS provider.slug')->leftJoin('common.providers AS providers', 'providers.id', '=', 'common.social_providers.provider_id');
-    }
-
     public function getUrlAttribute($value)
     {
         return Provider::urlReplace($this->provider->name, $value);
