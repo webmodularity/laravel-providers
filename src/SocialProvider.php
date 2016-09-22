@@ -38,4 +38,12 @@ class SocialProvider extends Model
     {
         return Provider::urlReplace($this->provider->name, $value);
     }
+
+    /**
+     * Get the associated Provider record.
+     */
+    public function provider()
+    {
+        return $this->belongsTo('WebModularity\LaravelProviders\Provider');
+    }
 }
