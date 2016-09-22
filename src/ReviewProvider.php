@@ -30,7 +30,7 @@ class ReviewProvider extends Model
      */
     public function scopeJoinProvider($query)
     {
-        return $query->leftJoin('common.providers as PROVIDER', 'PROVIDER.id', '=', 'common.review_providers.provider_id');
+        return $query->leftJoin('common.providers as P', 'P.id', '=', 'common.review_providers.provider_id');
     }
 
     public function getUrlAttribute($value) {

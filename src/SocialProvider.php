@@ -31,7 +31,7 @@ class SocialProvider extends Model
      */
     public function scopeJoinProvider($query)
     {
-        return $query->leftJoin('common.providers as PROVIDER', 'PROVIDER.id', '=', 'common.social_providers.provider_id');
+        return $query->leftJoin('common.providers as P', 'P.id', '=', 'common.social_providers.provider_id');
     }
 
     public function getUrlAttribute($value)
