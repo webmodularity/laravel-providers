@@ -29,7 +29,7 @@ class Provider extends Model
     }
 
     public static function getUrlReplaceConfig($sourceSlug) {
-        $configData = config('providers.' . $sourceSlug, []);
+        $configData = config('wm.providers.' . $sourceSlug, []);
         $parsed = [];
         foreach ($configData as $key => $data) {
             if (is_array($data)) {
@@ -47,7 +47,7 @@ class Provider extends Model
     public static function getConfiguredProviderSlugs()
     {
         $configuredProviders = [];
-        $allProviders = config('providers', []);
+        $allProviders = config('wm.providers', []);
         foreach ($allProviders as $providerKey => $providerData) {
             if (isset($providerData['id']) && !empty($providerData['id'])) {
                 $configuredProviders[] = $providerKey;
@@ -58,7 +58,7 @@ class Provider extends Model
 
     public static function getDataFromGoogle() {
         $apiKey = config('services.google.key');
-        $placeId = config('providers.google.place.id');
+        $placeId = config('wm.providers.google.place.id');
         $googlePlaces = new PlacesApi($apiKey);
         $response = null;
         try {
@@ -79,6 +79,6 @@ class Provider extends Model
             'token' => config('services.yelp.token'),
             'tokenSecret' => config('services.yelp.tokenSecret')
         ]);
-        return collect($client->getBusiness(config('providers.yelp.id')));
+        return collect($client->getBusiness(config('wm.providers.yelp.id')));
     }
 }
