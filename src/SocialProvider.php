@@ -4,7 +4,6 @@ namespace WebModularity\LaravelProviders;
 
 use Illuminate\Database\Eloquent\Model;
 use WebModularity\LaravelProviders\Provider;
-use Log;
 use WebModularity\LaravelProviders\Scopes\ProviderScope;
 
 class SocialProvider extends Model
@@ -34,5 +33,10 @@ class SocialProvider extends Model
     public function provider()
     {
         return $this->belongsTo('WebModularity\LaravelProviders\Provider');
+    }
+
+    public static function isActiveSocialAuth($slug)
+    {
+        return in_array($slug, config('wm.auth.social.providers', []));
     }
 }
