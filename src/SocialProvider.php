@@ -39,4 +39,19 @@ class SocialProvider extends Model
     {
         return in_array($slug, config('wm.auth.social.providers', []));
     }
+
+    /**
+     * @param $slug
+     * @return mixed
+     */
+    public static function findFromSlug($slug)
+    {
+        if (static::isActiveSocialAuth($slug)) {
+            return static::whereHas('provider', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })->first();
+        }
+
+        return null;
+    }
 }
