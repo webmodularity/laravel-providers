@@ -2,10 +2,20 @@
 
 namespace WebModularity\LaravelProviders;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class SocialProvider extends Model
 {
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('withProvider', function(Builder $builder) {
+            $builder->with(['provider']);
+        });
+    }
+
     /**
      * The table associated with the model.
      *
@@ -25,11 +35,6 @@ class SocialProvider extends Model
         return Provider::urlReplace($this->provider->name, $value);
     }
 
-    public function getSlugAttribute($value)
-    {
-        return $this->provider->slug;
-    }
-
     /**
      * Get the associated Provider record.
      */
@@ -38,14 +43,13 @@ class SocialProvider extends Model
         return $this->belongsTo('WebModularity\LaravelProviders\Provider');
     }
 
-    /**
-     * @param string $slug
-     * @return bool
-     */
-
-    public static function isActiveSocialAuth($slug)
+    public function authIsActive()
     {
-        return in_array($slug, config('wm.auth.social.providers', []));
+        return in_array($this->provider->slug, config('wm.auth.social.providers', []));
     }
 
+    public function getSlug()
+    {
+        return $this->provider->slug;
+    }
 }
