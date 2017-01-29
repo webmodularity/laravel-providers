@@ -25,6 +25,11 @@ class SocialProvider extends Model
         return Provider::urlReplace($this->provider->name, $value);
     }
 
+    public function getSlugAttribute($value)
+    {
+        return $this->provider->slug;
+    }
+
     /**
      * Get the associated Provider record.
      */
