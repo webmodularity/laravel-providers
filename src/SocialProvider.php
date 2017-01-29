@@ -3,8 +3,6 @@
 namespace WebModularity\LaravelProviders;
 
 use Illuminate\Database\Eloquent\Model;
-use WebModularity\LaravelProviders\Provider;
-use WebModularity\LaravelProviders\Scopes\ProviderScope;
 
 class SocialProvider extends Model
 {
@@ -35,23 +33,14 @@ class SocialProvider extends Model
         return $this->belongsTo('WebModularity\LaravelProviders\Provider');
     }
 
+    /**
+     * @param string $slug
+     * @return bool
+     */
+
     public static function isActiveSocialAuth($slug)
     {
         return in_array($slug, config('wm.auth.social.providers', []));
     }
 
-    /**
-     * @param $slug
-     * @return mixed
-     */
-    public static function findFromSlug($slug)
-    {
-        if (static::isActiveSocialAuth($slug)) {
-            return static::whereHas('provider', function ($query) use ($slug) {
-                $query->where('slug', $slug);
-            })->first();
-        }
-
-        return null;
-    }
 }
