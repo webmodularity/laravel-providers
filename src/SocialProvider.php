@@ -45,7 +45,7 @@ class SocialProvider extends Model
 
     public function authIsActive()
     {
-        return in_array($this->provider->slug, config('wm.auth.social.providers', []));
+        return in_array($this->getSlug(), config('wm.auth.social.providers', []));
     }
 
     public function getSlug()
