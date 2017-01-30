@@ -52,4 +52,5 @@ class SocialProvider extends Model
     {
         return $this->provider->slug;
     }
+
 }
