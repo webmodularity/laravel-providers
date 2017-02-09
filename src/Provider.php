@@ -8,6 +8,15 @@ use SKAgarwal\GoogleApi\Exceptions\GooglePlacesApiException;
 use Stevenmaguire\Yelp\Client as YelpClient;
 use Log;
 
+/**
+ * WebModularity\LaravelProviders\Provider
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $url_home
+ */
+
 class Provider extends Model
 {
     /**

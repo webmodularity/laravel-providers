@@ -3,8 +3,17 @@
 namespace WebModularity\LaravelProviders;
 
 use Illuminate\Database\Eloquent\Model;
-use WebModularity\LaravelProviders\Provider;
-use WebModularity\LaravelProviders\Scopes\ProviderScope;
+
+/**
+ * WebModularity\LaravelProviders\ReviewProvider
+ *
+ * @property int $id
+ * @property int $provider_id
+ * @property string $url
+ * @property string $url_review
+ * @property string $url_review_user
+ * @property-read \WebModularity\LaravelProviders\Provider $provider
+ */
 
 class ReviewProvider extends Model
 {
@@ -22,15 +31,18 @@ class ReviewProvider extends Model
      */
     public $timestamps = false;
 
-    public function getUrlAttribute($value) {
+    public function getUrlAttribute($value)
+    {
         return Provider::urlReplace($this->provider->slug, $value);
     }
 
-    public function getUrlReviewAttribute($value) {
+    public function getUrlReviewAttribute($value)
+    {
         return Provider::urlReplace($this->provider->slug, $value);
     }
 
-    public function getUrlReviewUserAttribute($value) {
+    public function getUrlReviewUserAttribute($value)
+    {
         return Provider::urlReplace($this->provider->slug, $value);
     }
 

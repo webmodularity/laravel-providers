@@ -12,7 +12,8 @@ class ProvidersServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/providers.php', 'wm.providers');
     }
 
-    public function boot() {
+    public function boot()
+    {
         // Config
         $this->publishes([__DIR__ . '/../config/providers.php' => config_path('wm/providers.php')], 'config');
     }

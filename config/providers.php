@@ -4,10 +4,13 @@ return [
     /**
      * To find Google values go to Google My Business and navigate to dashboard for this business
      * Navigate to the Info tab and find the "Published On" section
-     * id: Click the Google Search and use the shortest value that pulls up business in google (try and crop address from search)
+     * id: Click the Google Search and use the shortest value that pulls up business
+     * in google (try and crop address from search)
      * place :
-     *     id: Go to https://developers.google.com/places/place-id and enter name of business then copy Place ID: (27 char string)
-     *     cid: Right click Google Maps and choose "Copy link location". Paste that into scratch file and extract cid=(19 digit number)
+     *     id: Go to https://developers.google.com/places/place-id and enter name of business
+     *         then copy Place ID: (27 char string)
+     *     cid: Right click Google Maps and choose "Copy link location". Paste that into scratch
+     *         file and extract cid=(19 digit number)
      *     lrd: Go to http://www.uksbd.co.uk/local/cid-converter/ and enter this business' cid
      */
     'google' => [

@@ -5,13 +5,22 @@ namespace WebModularity\LaravelProviders;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * WebModularity\LaravelProviders\SocialProvider
+ *
+ * @property int $id
+ * @property int $provider_id
+ * @property string $url
+ * @property-read \WebModularity\LaravelProviders\Provider $provider
+ */
+
 class SocialProvider extends Model
 {
     protected static function boot()
     {
         parent::boot();
 
-        static::addGlobalScope('withProvider', function(Builder $builder) {
+        static::addGlobalScope('withProvider', function (Builder $builder) {
             $builder->with(['provider']);
         });
     }
@@ -52,5 +61,4 @@ class SocialProvider extends Model
     {
         return $this->provider->slug;
     }
-
 }
