@@ -33,11 +33,17 @@ class Provider extends Model
      */
     public $timestamps = false;
 
-    public static function urlReplace($sourceSlug, $url) {
-        return str_replace(array_keys(static::getUrlReplaceConfig($sourceSlug)), static::getUrlReplaceConfig($sourceSlug), $url);
+    public static function urlReplace($sourceSlug, $url)
+    {
+        return str_replace(
+            array_keys(static::getUrlReplaceConfig($sourceSlug)),
+            static::getUrlReplaceConfig($sourceSlug),
+            $url
+        );
     }
 
-    public static function getUrlReplaceConfig($sourceSlug) {
+    public static function getUrlReplaceConfig($sourceSlug)
+    {
         $configData = config('wm.providers.' . $sourceSlug, []);
         $parsed = [];
         foreach ($configData as $key => $data) {
@@ -65,7 +71,8 @@ class Provider extends Model
         return $configuredProviders;
     }
 
-    public static function getDataFromGoogle() {
+    public static function getDataFromGoogle()
+    {
         $apiKey = config('services.google.key');
         $placeId = config('wm.providers.google.place.id');
         $googlePlaces = new PlacesApi($apiKey);
@@ -81,7 +88,8 @@ class Provider extends Model
         return $response;
     }
 
-    public static function getDataFromYelp() {
+    public static function getDataFromYelp()
+    {
         $client = new YelpClient([
             'consumerKey' => config('services.yelp.consumerKey'),
             'consumerSecret' => config('services.yelp.consumerSecret'),
