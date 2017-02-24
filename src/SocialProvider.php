@@ -80,4 +80,23 @@ class SocialProvider extends Model
 
         return null;
     }
+
+    /**
+     * Returns the url of the social user avatar if available.
+     * @param $socialUser
+     * @return string|null Avatar url or null
+     */
+    public function getAvatarFromSocial($socialUser)
+    {
+        if (empty($socialUser->avatar)) {
+            return null;
+        }
+
+        if ($this->getSlug() == 'google') {
+            // Change default size to 160
+            return preg_replace('/\?sz=\d+$/', '?sz=160', $socialUser->avatar, 1);
+        }
+
+        return $socialUser->avatar;
+    }
 }
