@@ -62,6 +62,12 @@ class SocialProvider extends Model
         return $this->provider->slug;
     }
 
+    /**
+     * Get a more accurate first and last name from some social providers.
+     * @param $socialUser
+     * @return array|null [] keyed by firstName, lastName
+     */
+
     public function getPersonNameFromSocialUser($socialUser)
     {
         // Extract person name based on SocialProvider
