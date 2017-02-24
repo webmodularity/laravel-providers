@@ -4,6 +4,7 @@ namespace WebModularity\LaravelProviders;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Socialite\Contracts\User as SocialUser;
 
 /**
  * WebModularity\LaravelProviders\SocialProvider
@@ -68,7 +69,7 @@ class SocialProvider extends Model
      * @return array|null [] keyed by firstName, lastName
      */
 
-    public function getPersonNameFromSocialUser($socialUser)
+    public function getPersonNameFromSocialUser(SocialUser $socialUser)
     {
         // Extract person name based on SocialProvider
         if ($this->getSlug() == 'google') {
@@ -86,17 +87,17 @@ class SocialProvider extends Model
      * @param $socialUser
      * @return string|null Avatar url or null
      */
-    public function getAvatarFromSocial($socialUser)
+    public function getAvatarFromSocial(SocialUser $socialUser)
     {
-        if (empty($socialUser->avatar)) {
+        if (empty($socialUser->getAvatar())) {
             return null;
         }
 
         if ($this->getSlug() == 'google') {
             // Change default size to 160
-            return preg_replace('/\?sz=\d+$/', '?sz=160', $socialUser->avatar, 1);
+            return preg_replace('/\?sz=\d+$/', '?sz=160', $socialUser->getAvatar(), 1);
         }
 
-        return $socialUser->avatar;
+        return $socialUser->getAvatar();
     }
 }
