@@ -61,4 +61,17 @@ class SocialProvider extends Model
     {
         return $this->provider->slug;
     }
+
+    public function getPersonNameFromSocialUser($socialUser)
+    {
+        // Extract person name based on SocialProvider
+        if ($this->getSlug() == 'google') {
+            return [
+                'firstName' => $socialUser->user['name']['givenName'],
+                'lastName' => $socialUser->user['name']['familyName']
+            ];
+        }
+
+        return null;
+    }
 }
